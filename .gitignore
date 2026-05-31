@@ -1,0 +1,6 @@
+node_modules/
+.venv/
+IMG/Rostros/
+.env
+__pycache__/
+*.pyc

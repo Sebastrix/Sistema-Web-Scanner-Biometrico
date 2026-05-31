@@ -1,0 +1,589 @@
+:root {
+    --primary: #2a5298;
+    --primary-dark: #1e3c72;
+    --bg: #f4f6f9;
+    --white: #ffffff;
+    --text: #263238;
+    --gray: #777;
+    --danger: #d63031;
+    --success: #00b894;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+}
+
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 260px;
+    background: linear-gradient(180deg, var(--primary-dark), var(--primary));
+    color: white;
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.brand {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.brand img {
+    width: 120px;
+    margin-bottom: 10px;
+}
+
+.brand h2 {
+    font-size: 26px;
+}
+
+.brand span {
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar nav a {
+    color: white;
+    text-decoration: none;
+    padding: 13px 15px;
+    border-radius: 12px;
+    transition: 0.3s;
+    font-size: 15px;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.active {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+.logout {
+    margin-top: auto;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    background: white;
+    color: var(--primary);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* MAIN */
+.main-content {
+    flex: 1;
+    padding: 30px;
+}
+
+.topbar {
+    background: var(--white);
+    padding: 25px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+    margin-bottom: 25px;
+}
+
+.topbar h1 {
+    color: var(--primary);
+}
+
+.topbar p {
+    color: var(--gray);
+    margin-top: 5px;
+}
+
+.topbar-card {
+    background: var(--bg);
+    padding: 15px 25px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.topbar-card span {
+    display: block;
+    font-size: 12px;
+    color: var(--gray);
+}
+
+.topbar-card strong {
+    color: var(--primary);
+}
+
+/* SECTIONS */
+.section {
+    display: none;
+}
+
+.active-section {
+    display: block;
+}
+
+/* CARDS */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.card {
+    background: var(--white);
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.card span {
+    font-size: 32px;
+}
+
+.card h3 {
+    font-size: 32px;
+    margin-top: 10px;
+    color: var(--primary);
+}
+
+.card p {
+    color: var(--gray);
+    font-size: 14px;
+}
+
+/* WELCOME */
+.welcome-box {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.welcome-box h2 {
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.welcome-box p {
+    color: var(--gray);
+    line-height: 1.6;
+}
+
+/* TABLE */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.section-header h2 {
+    color: var(--primary);
+}
+
+.section-header button {
+    padding: 12px 18px;
+    border: none;
+    background: var(--primary);
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.section-header button:hover {
+    background: var(--primary-dark);
+}
+
+.table-box {
+    background: var(--white);
+    padding: 20px;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background: var(--primary);
+    color: white;
+}
+
+th,
+td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+td {
+    color: #444;
+}
+
+.badge-admin,
+.badge-cliente {
+    padding: 6px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.badge-admin {
+    background: #dfe6ff;
+    color: var(--primary);
+}
+
+.badge-cliente {
+    background: #e8fff6;
+    color: var(--success);
+}
+
+.btn-eliminar {
+    padding: 8px 12px;
+    border: none;
+    background: var(--danger);
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* MODAL CREAR CUENTA */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2500;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    width: 400px;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h2 {
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.modal-content label {
+    display: block;
+    margin-top: 12px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.modal-content input,
+.modal-content select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 6px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.modal-actions button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn-cancelar {
+    background: #ddd;
+}
+
+.btn-guardar {
+    background: var(--primary);
+    color: white;
+}
+
+#mensajeCuenta {
+    margin-top: 12px;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* PEDIDOS ADMIN */
+.select-estado-pedido {
+    padding: 8px 10px;
+    border: 1px solid #d9e2f3;
+    border-radius: 10px;
+    outline: none;
+    font-weight: 700;
+    color: var(--primary);
+    background: #f8fbff;
+}
+
+.btn-ver-detalle {
+    padding: 8px 12px;
+    border: none;
+    background: var(--primary);
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.btn-ver-detalle:hover {
+    background: var(--primary-dark);
+}
+
+/* MODAL DETALLE PEDIDO ADMIN */
+.modal-detalle-admin {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    background: rgba(0, 0, 0, 0.55);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal-detalle-admin.active {
+    display: flex;
+}
+
+.modal-detalle-admin-content {
+    width: 780px;
+    max-width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: white;
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+}
+
+.modal-detalle-admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 22px;
+}
+
+.modal-detalle-admin-header h2 {
+    color: var(--primary);
+    font-size: 28px;
+}
+
+.modal-detalle-admin-header p {
+    color: var(--gray);
+    margin-top: 6px;
+}
+
+.modal-detalle-admin-header button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: #eef4ff;
+    color: var(--primary);
+    font-size: 22px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.modal-detalle-admin-header button:hover {
+    background: #dfeaff;
+}
+
+.detalle-admin-cliente {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.detalle-admin-cliente div {
+    background: #f4f7fb;
+    border: 1px solid #e5ecf7;
+    border-radius: 16px;
+    padding: 14px;
+}
+
+.detalle-admin-cliente span {
+    display: block;
+    color: var(--gray);
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.detalle-admin-cliente strong {
+    color: var(--primary);
+    font-size: 15px;
+}
+
+.detalle-admin-direccion {
+    background: #eef4ff;
+    border-radius: 18px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.detalle-admin-direccion h3 {
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.detalle-admin-direccion p {
+    color: #333;
+    margin-top: 5px;
+}
+
+.contenido-detalle-admin {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.detalle-admin-producto {
+    display: grid;
+    grid-template-columns: 90px 1fr auto;
+    gap: 14px;
+    align-items: center;
+    border: 1px solid #e5ecf7;
+    border-radius: 18px;
+    padding: 14px;
+    background: #ffffff;
+}
+
+.detalle-admin-producto img {
+    width: 90px;
+    height: 75px;
+    border-radius: 14px;
+    object-fit: cover;
+}
+
+.detalle-admin-producto-info h4 {
+    color: var(--primary);
+    margin-bottom: 5px;
+}
+
+.detalle-admin-producto-info p {
+    color: var(--gray);
+    font-size: 13px;
+    line-height: 1.35;
+}
+
+.detalle-admin-producto-monto {
+    text-align: right;
+    color: var(--primary);
+    font-weight: 900;
+}
+
+.detalle-admin-producto-monto span {
+    display: block;
+    color: var(--gray);
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.detalle-admin-total {
+    margin-top: 10px;
+    padding: 16px;
+    border-radius: 16px;
+    background: var(--primary);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: 900;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .admin-layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .topbar {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 800px) {
+    .detalle-admin-cliente {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .detalle-admin-producto {
+        grid-template-columns: 70px 1fr;
+    }
+
+    .detalle-admin-producto-monto {
+        grid-column: 1 / -1;
+        text-align: left;
+    }
+}
+
+@media (max-width: 600px) {
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .main-content {
+        padding: 18px;
+    }
+
+    .modal-content {
+        width: 90%;
+    }
+}
+
+@media (max-width: 520px) {
+    .detalle-admin-cliente {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Linaje - Usuario</title>
+    <link rel="stylesheet" href="/CSS/UsuarioPrincipal.css">
+</head>
+<body>
+
+<div class="app">
+
+    <!-- HEADER SUPERIOR -->
+    <header class="header">
+        <div class="logo">
+            <img src="/IMG/LogoLinaje.png" alt="Linaje">
+        </div>
+
+        <div class="search-box">
+            <span>🔍</span>
+            <input type="text" placeholder="Buscar productos...">
+        </div>
+
+        <div class="header-actions">
+
+            <!-- PERFIL USUARIO -->
+            <div class="user-session">
+                <button class="user-btn" id="btnUsuarioSesion">
+                    👤 Hola, <span id="nombreClienteHeader">Cliente</span>
+                    <span>⌄</span>
+                </button>
+
+                <div class="perfil-dropdown" id="perfilDropdown">
+                    <button type="button" id="btnVistaDatosCliente">👤 Mis datos</button>
+                    <button type="button" id="btnVistaMetodoPago">💳 Método de pago</button>
+                    <button type="button" id="btnVistaPedidos">🧾 Mis pedidos</button>
+                    <button type="button" id="btnCerrarSesionUsuario" class="opcion-cerrar">
+                        🚪 Cerrar sesión
+                    </button>
+                </div>
+            </div>
+
+            <!-- CARRITO -->
+            <button class="cart-btn" id="btnAbrirCarrito">
+                <span class="cart-icon">🛒</span>
+                <span class="cart-count">0</span>
+                <strong id="totalCarritoHeader">S/ 0.00</strong>
+            </button>
+
+        </div>
+    </header>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <nav class="menu">
+            <a href="#" class="active" id="btnMenuInicio">
+                <span>🏠</span>
+                Inicio
+            </a>
+
+            <a href="#" id="btnMenuPedidos">
+                <span>📋</span>
+                Mis pedidos
+            </a>
+
+            <a href="#">
+                <span>🖤</span>
+                Favoritos
+            </a>
+
+            <a href="#" id="btnMenuDatos">
+                <span>📍</span>
+                Mis datos
+            </a>
+
+            <a href="#" id="btnMenuPago">
+                <span>💳</span>
+                Métodos de pago
+            </a>
+
+            <a href="#">
+                <span>🏷️</span>
+                Ofertas
+                <small>NUEVO</small>
+            </a>
+
+            <a href="#">
+                <span>❔</span>
+                Soporte
+            </a>
+        </nav>
+
+        <div class="delivery-card">
+            <div class="delivery-icon">🛵</div>
+            <h4>Entrega rápida</h4>
+            <strong>25-40 min</strong>
+            <p>En Chincha Alta y zonas aledañas</p>
+        </div>
+
+        <div class="club-card">
+            <div class="club-icon">👑</div>
+            <h3>LINAJE CLUB</h3>
+            <p>Acumula puntos en cada pedido</p>
+            <button type="button">Conoce más</button>
+        </div>
+
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main">
+
+        <!-- VISTA INICIO / PRODUCTOS -->
+        <section id="vistaInicio" class="vista-contenido active-view">
+
+            <!-- CATEGORÍAS -->
+            <section class="categories">
+                <button type="button" class="active">🍔 Combos</button>
+                <button type="button">🍔 Hamburguesas</button>
+                <button type="button">🍟 Salchipapas</button>
+                <button type="button">🥤 Bebidas</button>
+                <button type="button">🍰 Postres</button>
+                <button type="button">🏷️ Promociones</button>
+            </section>
+
+            <!-- BANNER SLIDER -->
+            <section class="banner-slider">
+                <div class="banner-track" id="bannerTrack">
+                    <div class="banner-slide active">
+                        <img src="/IMG/Portadas/combo-callejero.png" alt="Combo Callejero">
+                    </div>
+                    <div class="banner-slide">
+                        <img src="/IMG/Portadas/combo-doble-bacon.png" alt="Combo Doble Bacon">
+                    </div>
+                    <div class="banner-slide">
+                        <img src="/IMG/Portadas/combo-familiar.png" alt="Combo Familiar">
+                    </div>
+                    <div class="banner-slide">
+                        <img src="/IMG/Portadas/combo-crispy.png" alt="Combo Crispy">
+                    </div>
+                </div>
+
+                <button type="button" class="banner-btn prev" id="btnBannerPrev">‹</button>
+                <button type="button" class="banner-btn next" id="btnBannerNext">›</button>
+
+                <div class="banner-dots" id="bannerDots">
+                    <button type="button" class="active" data-index="0"></button>
+                    <button type="button" data-index="1"></button>
+                    <button type="button" data-index="2"></button>
+                    <button type="button" data-index="3"></button>
+                </div>
+            </section>
+
+            <!-- PRODUCTOS DESTACADOS -->
+            <section class="section-title">
+                <div>
+                    <span>⭐</span>
+                    <h2>Productos destacados</h2>
+                </div>
+                <a href="#">Ver todos →</a>
+            </section>
+
+            <section class="products">
+
+                <article class="product-card">
+                    <div class="tag">MÁS PEDIDO</div>
+                    <button type="button" class="favorite">♡</button>
+                    <img src="/IMG/Productos/clasica-linaje.png" alt="Clásica Linaje">
+                    <div class="product-info">
+                        <h3>Clásica Linaje</h3>
+                        <p>Carne jugosa, queso cheddar, lechuga, tomate, cebolla y salsa linaje.</p>
+                        <div class="product-footer">
+                            <strong>S/ 18.90</strong>
+                            <button type="button">🛒 Agregar</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <button type="button" class="favorite">♡</button>
+                    <img src="/IMG/Productos/salchipapas-linaje.png" alt="Salchipapas Linaje">
+                    <div class="product-info">
+                        <h3>Salchipapas Linaje</h3>
+                        <p>Salchicha premium, papas fritas y nuestras salsas especiales.</p>
+                        <div class="product-footer">
+                            <strong>S/ 16.50</strong>
+                            <button type="button">🛒 Agregar</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <button type="button" class="favorite">♡</button>
+                    <img src="/IMG/Productos/combo-linaje.png" alt="Combo Linaje">
+                    <div class="product-info">
+                        <h3>Combo Linaje</h3>
+                        <p>Hamburguesa clásica + papas + bebida 16 oz.</p>
+                        <div class="product-footer">
+                            <strong>S/ 24.90</strong>
+                            <button type="button">🛒 Agregar</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <button type="button" class="favorite">♡</button>
+                    <img src="/IMG/Productos/doble-bacon.png" alt="Doble Bacon">
+                    <div class="product-info">
+                        <h3>Doble Bacon</h3>
+                        <p>Doble carne, doble queso, tocino crocante y salsa linaje.</p>
+                        <div class="product-footer">
+                            <strong>S/ 25.90</strong>
+                            <button type="button">🛒 Agregar</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <button type="button" class="favorite">♡</button>
+                    <img src="/IMG/Productos/limonada-clasica.png" alt="Limonada Clásica">
+                    <div class="product-info">
+                        <h3>Limonada Clásica</h3>
+                        <p>Refrescante limonada con hierbabuena natural.</p>
+                        <div class="product-footer">
+                            <strong>S/ 7.90</strong>
+                            <button type="button">🛒 Agregar</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <button type="button" class="favorite">♡</button>
+                    <img src="/IMG/Productos/torta-chocolate.png" alt="Torta de Chocolate">
+                    <div class="product-info">
+                        <h3>Torta de Chocolate</h3>
+                        <p>Suave bizcocho de chocolate con cobertura cremosa.</p>
+                        <div class="product-footer">
+                            <strong>S/ 9.90</strong>
+                            <button type="button">🛒 Agregar</button>
+                        </div>
+                    </div>
+                </article>
+
+            </section>
+
+            <!-- RECOMENDACIONES INTELIGENTES -->
+            <section class="section-title">
+                <div>
+                    <span>🤖</span>
+                    <h2>Recomendaciones inteligentes</h2>
+                </div>
+                <a href="#">Basado en tus pedidos →</a>
+            </section>
+
+            <section class="products" id="productosRecomendadosIA">
+                <article class="product-card">
+                    <div class="tag">IA</div>
+                    <div class="product-info">
+                        <h3>Agente inteligente Prolog</h3>
+                        <p>Aquí aparecerán las recomendaciones generadas por la base de hechos y reglas del sistema Linaje.</p>
+                        <div class="product-footer">
+                            <strong>Analizando...</strong>
+                            <button type="button">🤖 Recomendación IA</button>
+                        </div>
+                    </div>
+                </article>
+            </section>
+
+            <!-- OFERTAS -->
+            <section class="offers">
+                <div class="offer-header">
+                    <div>
+                        <span>🏷️</span>
+                        <h2>Ofertas del día</h2>
+                        <p>Descuentos especiales por tiempo limitado</p>
+                    </div>
+                    <div class="timer">
+                        <span>Termina en:</span>
+                        <strong>06</strong><small>HRS</small>
+                        <strong>42</strong><small>MIN</small>
+                        <strong>18</strong><small>SEG</small>
+                    </div>
+                </div>
+
+                <div class="offer-grid">
+                    <div class="offer-card">
+                        <img src="/IMG/Productos/promo-hamburguesas.png" alt="Oferta Hamburguesas">
+                        <div><h3>2x1 en Hamburguesas</h3><p>Elige tus favoritas</p></div>
+                    </div>
+                    <div class="offer-card">
+                        <img src="/IMG/Productos/combo-familiar.png" alt="Combo Familiar">
+                        <div><h3>Combo Familiar</h3><p>4 hamburguesas + 4 papas</p></div>
+                        <span>-15%</span>
+                    </div>
+                    <div class="offer-card">
+                        <img src="/IMG/Productos/postres.png" alt="Postres">
+                        <div><h3>Postres con 20% OFF</h3><p>Dulce final para tu pedido</p></div>
+                    </div>
+                </div>
+            </section>
+
+        </section>
+
+        <!-- VISTA MIS DATOS -->
+        <section id="vistaDatosCliente" class="vista-contenido">
+            <div class="perfil-page-card">
+                <div class="perfil-page-header">
+                    <div>
+                        <span>👤</span>
+                        <h2>Mis datos</h2>
+                        <p>Actualiza tu información personal para tus reservas y pedidos.</p>
+                    </div>
+                    <button type="button" class="btn-volver-inicio" data-view="vistaInicio">Volver al inicio</button>
+                </div>
+
+                <form id="formDatosCliente" class="form-datos-cliente">
+                    <div class="form-grid-datos">
+                        <div>
+                            <label>Nombres</label>
+                            <input type="text" id="editNombres" required>
+                        </div>
+                        <div>
+                            <label>Apellidos</label>
+                            <input type="text" id="editApellidos" required>
+                        </div>
+                        <div>
+                            <label>Celular</label>
+                            <input type="text" id="editCelular" maxlength="15" required>
+                        </div>
+                        <div>
+                            <label>Usuario</label>
+                            <input type="text" id="editUsuario" disabled>
+                        </div>
+                    </div>
+
+                    <label>Dirección</label>
+                    <input type="text" id="editDireccion" required>
+
+                    <label>Referencia</label>
+                    <input type="text" id="editReferencia">
+
+                    <p id="mensajeDatosCliente"></p>
+                    <button type="submit" class="btn-guardar-datos">Guardar cambios</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- VISTA MÉTODO DE PAGO -->
+        <section id="vistaMetodoPago" class="vista-contenido">
+            <div class="perfil-page-card">
+                <div class="perfil-page-header">
+                    <div>
+                        <span>💳</span>
+                        <h2>Método de pago</h2>
+                        <p>Selecciona cómo deseas pagar tus pedidos o reservas.</p>
+                    </div>
+                    <button type="button" class="btn-volver-inicio" data-view="vistaInicio">Volver al inicio</button>
+                </div>
+
+                <div class="metodos-pago-grid">
+                    <div class="metodo-pago-card active">
+                        <span>💵</span>
+                        <h3>Efectivo</h3>
+                        <p>Paga al momento de recoger o recibir tu pedido.</p>
+                    </div>
+                    <div class="metodo-pago-card">
+                        <span>📱</span>
+                        <h3>Yape</h3>
+                        <p>Pago rápido mediante número o QR.</p>
+                    </div>
+                    <div class="metodo-pago-card">
+                        <span>📲</span>
+                        <h3>Plin</h3>
+                        <p>Pago digital desde tu aplicativo bancario.</p>
+                    </div>
+                    <div class="metodo-pago-card">
+                        <span>💳</span>
+                        <h3>Tarjeta</h3>
+                        <p>Disponible próximamente.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VISTA MIS PEDIDOS -->
+        <section id="vistaPedidos" class="vista-contenido">
+            <div class="perfil-page-card">
+                <div class="perfil-page-header">
+                    <div>
+                        <span>🧾</span>
+                        <h2>Mis pedidos</h2>
+                        <p>Consulta tus pedidos y reservaciones realizadas.</p>
+                    </div>
+                    <button type="button" class="btn-volver-inicio" data-view="vistaInicio">Volver al inicio</button>
+                </div>
+
+                <div class="tabla-pedidos-box">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>N° Pedido</th>
+                                <th>Fecha</th>
+                                <th>Estado</th>
+                                <th>Total</th>
+                                <th>Detalle</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaMisPedidos">
+                            <tr>
+                                <td colspan="5">Aún no tienes pedidos registrados.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</div>
+
+<!-- MODAL CARRITO -->
+<div id="modalCarrito" class="modal-carrito">
+    <div class="modal-carrito-content">
+        <div class="modal-carrito-header">
+            <h2>🛒 Mi carrito</h2>
+            <button type="button" id="btnCerrarCarrito">×</button>
+        </div>
+
+        <div id="listaCarrito" class="lista-carrito">
+            <p>No hay productos en el carrito.</p>
+        </div>
+
+        <div class="carrito-resumen">
+            <span>Total:</span>
+            <strong id="totalCarritoModal">S/ 0.00</strong>
+        </div>
+
+        <label for="metodoPagoPedido">Método de pago</label>
+        <select id="metodoPagoPedido">
+            <option value="Efectivo">Efectivo</option>
+            <option value="Yape">Yape</option>
+            <option value="Plin">Plin</option>
+        </select>
+
+        <button type="button" id="btnProcederCompra" class="btn-proceder-compra">
+            Proceder con compra
+        </button>
+    </div>
+</div>
+
+<!-- MODAL VALIDACIÓN FACIAL PARA PEDIDO -->
+<div id="modalValidacionPedido" class="modal-facial-pedido">
+    <div class="modal-facial-pedido-content">
+        <h2>Validación facial del pedido</h2>
+        <p>Para registrar tu pedido, valida tu identidad con el scanner facial.</p>
+
+        <video id="videoPedidoFacial" autoplay playsinline></video>
+        <canvas id="canvasPedidoFacial" style="display: none;"></canvas>
+
+        <p id="mensajePedidoFacial"></p>
+
+        <div class="facial-actions">
+            <button type="button" id="btnActivarCamaraPedido">Activar cámara</button>
+            <button type="button" id="btnConfirmarPedidoFacial">Validar y registrar pedido</button>
+            <button type="button" id="btnCerrarValidacionPedido" class="btn-cerrar-facial">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL DETALLE DE PEDIDO -->
+<div id="modalDetallePedido" class="modal-detalle-pedido">
+    <div class="modal-detalle-content">
+        <div class="modal-detalle-header">
+            <div>
+                <h2>Detalle del pedido</h2>
+                <p id="detallePedidoResumen">Productos registrados en tu pedido.</p>
+            </div>
+            <button type="button" id="btnCerrarDetallePedido">×</button>
+        </div>
+        <div id="contenidoDetallePedido" class="contenido-detalle-pedido">
+            <p>Cargando detalle...</p>
+        </div>
+    </div>
+</div>
+
+<script src="../JS/UsuarioPrincipal.js"></script>
+
+</body>
+</html>

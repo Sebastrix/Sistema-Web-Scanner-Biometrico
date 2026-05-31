@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Administrador - Linaje</title>
+    <link rel="stylesheet" href="../CSS/AdminLinaje.css">
+</head>
+<body>
+<div class="admin-layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="brand">
+            <img src="../IMG/LogoLinaje.png" alt="Linaje">
+            <h2>Linaje</h2>
+            <span>Panel Admin</span>
+        </div>
+
+        <nav>
+            <a href="#" class="active" data-section="inicio">🏠 Inicio</a>
+            <a href="#" data-section="cuentas">👥 Cuentas</a>
+            <a href="#" data-section="pedidos">🧾 Pedidos</a>
+            <a href="#" data-section="reservas">📅 Reservas</a>
+            <a href="#" data-section="menu">🍔 Menú</a>
+            <a href="#" data-section="reportes">📊 Reportes</a>
+        </nav>
+
+        <button id="btnCerrarSesion" class="logout">Cerrar sesión</button>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <h1>Panel de Administrador</h1>
+                <p>Bienvenido, <strong id="nombreAdmin">Administrador</strong></p>
+            </div>
+
+            <div class="topbar-card">
+                <span>Rol</span>
+                <strong>Administrador</strong>
+            </div>
+        </header>
+
+        <!-- INICIO -->
+        <section id="inicio" class="section active-section">
+            <div class="cards">
+                <div class="card">
+                    <span>👥</span>
+                    <h3 id="totalCuentas">0</h3>
+                    <p>Cuentas registradas</p>
+                </div>
+
+                <div class="card">
+                    <span>🛡️</span>
+                    <h3 id="totalAdmins">0</h3>
+                    <p>Administradores</p>
+                </div>
+
+                <div class="card">
+                    <span>🙋</span>
+                    <h3 id="totalClientes">0</h3>
+                    <p>Clientes</p>
+                </div>
+
+                <div class="card">
+                    <span>📅</span>
+                    <h3>0</h3>
+                    <p>Reservas pendientes</p>
+                </div>
+            </div>
+
+            <div class="welcome-box">
+                <h2>Sistema Web Linaje Chincha</h2>
+                <p>
+                    Desde este panel podrás administrar cuentas, pedidos, reservas,
+                    menú del restaurante y reportes generales del sistema.
+                </p>
+            </div>
+        </section>
+
+        <!-- CUENTAS -->
+        <section id="cuentas" class="section">
+            <div class="section-header">
+                <h2>Gestión de cuentas</h2>
+                <button id="btnAbrirModal">+ Nueva cuenta</button>
+            </div>
+
+            <div class="table-box">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Usuario</th>
+                            <th>Rol</th>
+                            <th>Fecha creación</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaCuentas">
+                        <tr>
+                            <td colspan="5">Cargando cuentas...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- PEDIDOS -->
+        <section id="pedidos" class="section">
+            <div class="section-header">
+                <h2>Gestión de pedidos</h2>
+                <button type="button" id="btnRecargarPedidos">Recargar pedidos</button>
+            </div>
+
+            <div class="table-box">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>N° Pedido</th>
+                            <th>Cliente</th>
+                            <th>Fecha</th>
+                            <th>Método pago</th>
+                            <th>Total</th>
+                            <th>Estado</th>
+                            <th>Detalle</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tablaPedidosAdmin">
+                        <tr>
+                            <td colspan="7">Cargando pedidos...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- RESERVAS -->
+        <section id="reservas" class="section">
+            <div class="welcome-box">
+                <h2>Reservas</h2>
+                <p>Aquí se gestionarán las reservaciones de pedidos del restaurante.</p>
+            </div>
+        </section>
+
+        <!-- MENÚ -->
+        <section id="menu" class="section">
+            <div class="welcome-box">
+                <h2>Menú</h2>
+                <p>Aquí podrás registrar platos, combos, bebidas y precios.</p>
+            </div>
+        </section>
+
+        <!-- REPORTES -->
+        <section id="reportes" class="section">
+            <div class="welcome-box">
+                <h2>Reportes</h2>
+                <p>Aquí se visualizarán reportes de ventas, reservas y usuarios.</p>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<!-- MODAL CREAR CUENTA -->
+<div id="modalCuenta" class="modal">
+    <div class="modal-content">
+        <h2>Crear nueva cuenta</h2>
+
+        <form id="formNuevaCuenta">
+            <label>Usuario</label>
+            <input type="text" id="nuevoUsuario" placeholder="Ejemplo: cliente01" required>
+
+            <label>Contraseña</label>
+            <input type="password" id="nuevaContrasena" placeholder="Ingrese contraseña" required>
+
+            <label>Rol</label>
+            <select id="nuevoRol" required>
+                <option value="">Seleccione un rol</option>
+                <option value="0">Cliente</option>
+                <option value="1">Administrador</option>
+            </select>
+
+            <p id="mensajeCuenta"></p>
+
+            <div class="modal-actions">
+                <button type="button" id="btnCerrarModal" class="btn-cancelar">Cancelar</button>
+                <button type="submit" class="btn-guardar">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- MODAL DETALLE PEDIDO ADMIN -->
+<div id="modalDetallePedidoAdmin" class="modal-detalle-admin">
+    <div class="modal-detalle-admin-content">
+
+        <div class="modal-detalle-admin-header">
+            <div>
+                <h2>Detalle del pedido</h2>
+                <p id="detalleAdminResumen">Información completa del pedido seleccionado.</p>
+            </div>
+
+            <button type="button" id="btnCerrarDetallePedidoAdmin">×</button>
+        </div>
+
+        <div class="detalle-admin-cliente">
+            <div>
+                <span>Cliente</span>
+                <strong id="detalleAdminCliente">---</strong>
+            </div>
+
+            <div>
+                <span>Celular</span>
+                <strong id="detalleAdminCelular">---</strong>
+            </div>
+
+            <div>
+                <span>Método de pago</span>
+                <strong id="detalleAdminMetodoPago">---</strong>
+            </div>
+
+            <div>
+                <span>Estado</span>
+                <strong id="detalleAdminEstado">---</strong>
+            </div>
+        </div>
+
+        <div class="detalle-admin-direccion">
+            <h3>Datos de entrega</h3>
+            <p><strong>Dirección:</strong> <span id="detalleAdminDireccion">---</span></p>
+            <p><strong>Referencia:</strong> <span id="detalleAdminReferencia">---</span></p>
+        </div>
+
+        <div id="contenidoDetallePedidoAdmin" class="contenido-detalle-admin">
+            <p>Cargando productos del pedido...</p>
+        </div>
+
+    </div>
+</div>
+<script src="../JS/AdminLinaje.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Linaje</title>
+    <link rel="stylesheet" href="../CSS/PrincipalLogin.CSS">
+</head>
+<body>
+
+<div class="container">
+    <div class="left">
+        <div class="overlay"></div>
+
+        <div class="left-content">
+            <img src="../IMG/LogoLinaje.png" class="logo" alt="Linaje">
+        </div>
+
+        <img src="../IMG/Combo.png" class="combo" alt="Combo">
+    </div>
+
+    <div class="right">
+        <div class="login-box">
+            <div class="icon">🍔</div>
+
+            <h2>¡Bienvenido de vuelta!</h2>
+            <span>Inicia sesión para continuar</span>
+
+            <form id="formLogin">
+                <label>Usuario</label>
+                <div class="input">
+                    <span>👤</span>
+                    <input type="text" id="usuario" placeholder="Ingrese su usuario" required>
+                </div>
+
+                <label>Contraseña</label>
+                <div class="input">
+                    <span>🔒</span>
+                    <input type="password" id="contrasena" placeholder="********" required>
+                </div>
+
+                <div class="row">
+                    <label><input type="checkbox"> Recordarme</label>
+                    <a href="#">¿Olvidaste tu contraseña?</a>
+                </div>
+
+                <button type="submit">Iniciar sesión</button>
+                <button type="button" id="btnAbrirLoginFacial" class="btn-facial">
+                Ingresar con reconocimiento facial
+            </button>
+
+                <p id="mensajeLogin" class="mensaje-login"></p>
+            </form>
+
+            <p class="bottom-text">
+                ¿No tienes una cuenta?
+                <a href="../HTML/RegistroUsuario.html">Crear Cuenta</a>
+            </p>
+
+            <div class="features">
+                <span>🌿 Ingredientes frescos</span>
+                <span>❤️ Sabor inconfundible</span>
+                <span>🔥 Hecho con pasión</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MODAL LOGIN FACIAL -->
+<div id="modalLoginFacial" class="modal-facial">
+    <div class="modal-facial-content">
+        <h2>Ingreso con reconocimiento facial</h2>
+        <p>Ingresa tu usuario, activa la cámara y captura tu rostro.</p>
+
+        <label>Usuario</label>
+        <input type="text" id="usuarioFacial" placeholder="Ingrese su usuario">
+
+        <video id="videoFacial" autoplay playsinline></video>
+        <canvas id="canvasFacial" style="display: none;"></canvas>
+
+        <p id="mensajeFacial"></p>
+
+        <div class="facial-actions">
+            <button type="button" id="btnActivarCamaraFacial">Activar cámara</button>
+            <button type="button" id="btnCapturarLoginFacial">Capturar e ingresar</button>
+            <button type="button" id="btnCerrarLoginFacial" class="btn-cerrar-facial">Cancelar</button>
+        </div>
+    </div>
+</div>
+<script src="../JS/PrincipalLogin.js"></script>
+</body>
+</html>

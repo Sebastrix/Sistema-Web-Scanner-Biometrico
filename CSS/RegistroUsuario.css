@@ -1,0 +1,260 @@
+:root {
+    --primary: #2a5298;
+    --primary-dark: #1e3c72;
+    --bg: #f4f6f9;
+    --white: #ffffff;
+    --gray: #777;
+    --danger: #d63031;
+    --success: #00b894;
+    --border: #e5e8ef;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.registro-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+}
+
+.registro-card {
+    width: 720px;
+    background: var(--white);
+    border-radius: 24px;
+    padding: 35px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+}
+
+.logo-box {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.logo-box img {
+    width: 160px;
+    margin-bottom: 10px;
+}
+
+.logo-box h2 {
+    color: var(--primary);
+    margin-bottom: 5px;
+}
+
+.logo-box p {
+    color: var(--gray);
+    font-size: 14px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.form-group {
+    width: 100%;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+input {
+    width: 100%;
+    margin-top: 6px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    outline: none;
+    font-size: 14px;
+    background: #ffffff;
+}
+
+input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.12);
+}
+
+.info-rol {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 14px;
+    background: #eef4ff;
+    border: 1px solid #dbe7ff;
+    color: var(--primary-dark);
+}
+
+.info-rol div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info-rol span {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.info-rol strong {
+    background: var(--primary);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.info-rol small {
+    display: block;
+    margin-top: 8px;
+    font-size: 12px;
+    color: #52627a;
+}
+
+.scanner-box {
+    margin-top: 22px;
+    padding: 18px;
+    border-radius: 18px;
+    background: #f7f9fc;
+    text-align: center;
+    border: 1px solid var(--border);
+}
+
+.scanner-box h3 {
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.scanner-text {
+    color: var(--gray);
+    font-size: 13px;
+    line-height: 1.4;
+    margin-bottom: 14px;
+}
+
+video {
+    width: 100%;
+    height: 260px;
+    background: #111;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.scanner-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.scanner-actions button {
+    width: 100%;
+    padding: 11px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+#previewRostro {
+    display: none;
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 15px auto 0;
+    border: 4px solid var(--primary);
+}
+
+#mensajeRegistro {
+    margin-top: 14px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.btn-registrar {
+    width: 100%;
+    margin-top: 18px;
+    padding: 13px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.btn-registrar:hover,
+.scanner-actions button:hover {
+    transform: translateY(-2px);
+}
+
+.volver {
+    display: block;
+    text-align: center;
+    margin-top: 18px;
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.volver:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 780px) {
+    .registro-card {
+        width: 100%;
+        padding: 28px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}
+
+@media (max-width: 520px) {
+    .registro-container {
+        padding: 18px;
+    }
+
+    .registro-card {
+        width: 100%;
+        padding: 25px;
+    }
+
+    video {
+        height: 220px;
+    }
+
+    .scanner-actions {
+        flex-direction: column;
+    }
+
+    .logo-box img {
+        width: 130px;
+    }
+}
