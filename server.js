@@ -4,6 +4,7 @@
 // ==============================================================================================================================
 const express = require('express');
 const path = require('path');
+const multer = require("multer");
 const cors = require('cors');
 const sql = require('mssql/msnodesqlv8');
 const bcrypt = require('bcrypt');
@@ -22,6 +23,7 @@ app.use(cors());
 app.use(express.json({ limit: '15mb' }));
 app.use(express.urlencoded({ extended: true, limit: '15mb' }));
 app.use(express.static(__dirname));
+app.use('/models', express.static(path.join(__dirname, 'models')));
 
 
 // ==============================================================================================================================
@@ -2141,6 +2143,632 @@ function formatearCategoriaAdmin(categoria) {
 
     return categorias[categoria] || categoria || "Sin categoría";
 }
+
+// ==============================================================================================================================
+// RUTA TEMPORAL DE DIAGNÓSTICO PARA LOS MODELOS
+// ==============================================================================================================================
+app.get('/debug-models', (req, res) => {
+    const carpetaModelos = path.join(__dirname, 'models');
+    
+    if (!fs.existsSync(carpetaModelos)) {
+        return res.status(404).json({
+            error: "❌ ¡La carpeta 'models' NO existe en esta ruta!",
+            ruta_buscada: carpetaModelos
+        });
+    }
+
+    const archivos = fs.readdirSync(carpetaModelos);
+    res.json({
+        mensaje: "✅ ¡Carpeta encontrada exitosamente!",
+        ruta_real: carpetaModelos,
+        archivos_adentro: archivos
+    });
+});
+
+// ==============================================================================================================================
+// RUTA MAESTRA Y BLINDADA PARA LOS MODELOS DE FACE-API.JS
+// Qué hace: Entrega directamente cualquier archivo de la carpeta models sin importar bloqueos de Express o extensiones.
+// ==============================================================================================================================
+app.get('/models/:nombreArchivo', (req, res) => {
+    const path = require('path');
+    const fs = require('fs');
+    
+    const rutaAbsoluta = path.join(__dirname, 'models', req.params.nombreArchivo);
+    
+    if (fs.existsSync(rutaAbsoluta)) {
+        // Retorna el archivo directamente desde el disco duro
+        res.sendFile(rutaAbsoluta);
+    } else {
+        res.status(404).send('Archivo no encontrado en la carpeta física models');
+    }
+});
+
+// =====================================================================
+// PRODUCTOS - LISTAR PRODUCTOS ACTIVOS
+// GET /api/productos
+// =====================================================================
+app.get('/api/productos', async (req, res) => {
+    try {
+        const sebas = await global.conectarSebasDB();
+
+        if (!sebas) {
+            return res.status(500).json({
+                success: false,
+                message: "No se pudo conectar con la base de datos."
+            });
+        }
+
+        const result = await sebas.request().query(`
+            SELECT
+                id_producto,
+                nombre,
+                descripcion,
+                categoria,
+                precio,
+                imagen_ruta,
+                estado,
+                fecha_creacion
+            FROM ProductoLinaje
+            WHERE estado = 1
+            ORDER BY id_producto DESC
+        `);
+
+        return res.json({
+            success: true,
+            productos: result.recordset
+        });
+
+    } catch (error) {
+        console.error("Error cargando productos:", error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Error interno al cargar productos.",
+            error: error.message
+        });
+    }
+});
+
+
+// =====================================================================
+// ADMIN - LISTAR PRODUCTOS
+// GET /api/admin/productos
+// =====================================================================
+app.get('/api/admin/productos', async (req, res) => {
+    try {
+        const sebas = await global.conectarSebasDB();
+
+        if (!sebas) {
+            return res.status(500).json({
+                success: false,
+                message: "No se pudo conectar con la base de datos."
+            });
+        }
+
+        const result = await sebas.request().query(`
+            SELECT
+                id_producto,
+                nombre,
+                descripcion,
+                categoria,
+                precio,
+                imagen_ruta,
+                estado,
+                fecha_creacion
+            FROM ProductoLinaje
+            ORDER BY id_producto DESC
+        `);
+
+        return res.json({
+            success: true,
+            productos: result.recordset
+        });
+
+    } catch (error) {
+        console.error("Error cargando productos admin:", error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Error interno al cargar productos.",
+            error: error.message
+        });
+    }
+});
+
+
+// =====================================================================
+// ADMIN - CREAR PRODUCTO
+// POST /api/admin/productos
+// =====================================================================
+app.post('/api/admin/productos', async (req, res) => {
+    try {
+        const {
+            nombre,
+            descripcion,
+            categoria,
+            precio,
+            imagen_ruta
+        } = req.body;
+
+        if (!nombre || !descripcion || !categoria || !precio) {
+            return res.status(400).json({
+                success: false,
+                message: "Debe completar nombre, descripción, categoría y precio."
+            });
+        }
+
+        const precioNumero = Number(precio);
+
+        if (Number.isNaN(precioNumero) || precioNumero <= 0) {
+            return res.status(400).json({
+                success: false,
+                message: "El precio debe ser mayor a 0."
+            });
+        }
+
+        const sebas = await global.conectarSebasDB();
+
+        if (!sebas) {
+            return res.status(500).json({
+                success: false,
+                message: "No se pudo conectar con la base de datos."
+            });
+        }
+
+        await sebas
+            .request()
+            .input('nombre', sql.NVarChar, nombre.trim())
+            .input('descripcion', sql.NVarChar, descripcion.trim())
+            .input('categoria', sql.NVarChar, categoria.trim())
+            .input('precio', sql.Decimal(10, 2), precioNumero)
+            .input('imagen_ruta', sql.NVarChar, imagen_ruta || "/IMG/Productos/sin-imagen.png")
+            .query(`
+                INSERT INTO ProductoLinaje (
+                    nombre,
+                    descripcion,
+                    categoria,
+                    precio,
+                    imagen_ruta,
+                    estado
+                )
+                VALUES (
+                    @nombre,
+                    @descripcion,
+                    @categoria,
+                    @precio,
+                    @imagen_ruta,
+                    1
+                )
+            `);
+
+        return res.json({
+            success: true,
+            message: "Producto creado correctamente."
+        });
+
+    } catch (error) {
+        console.error("Error creando producto:", error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Error interno al crear producto.",
+            error: error.message
+        });
+    }
+});
+
+
+// =====================================================================
+// ADMIN - EDITAR PRODUCTO
+// PUT /api/admin/productos/:id
+// =====================================================================
+app.put('/api/admin/productos/:id', async (req, res) => {
+    try {
+        const idProducto = Number(req.params.id);
+
+        const {
+            nombre,
+            descripcion,
+            categoria,
+            precio,
+            imagen_ruta
+        } = req.body;
+
+        if (!idProducto) {
+            return res.status(400).json({
+                success: false,
+                message: "ID de producto no válido."
+            });
+        }
+
+        if (!nombre || !descripcion || !categoria || !precio) {
+            return res.status(400).json({
+                success: false,
+                message: "Debe completar nombre, descripción, categoría y precio."
+            });
+        }
+
+        const precioNumero = Number(precio);
+
+        if (Number.isNaN(precioNumero) || precioNumero <= 0) {
+            return res.status(400).json({
+                success: false,
+                message: "El precio debe ser mayor a 0."
+            });
+        }
+
+        const sebas = await global.conectarSebasDB();
+
+        if (!sebas) {
+            return res.status(500).json({
+                success: false,
+                message: "No se pudo conectar con la base de datos."
+            });
+        }
+
+        const existeProducto = await sebas
+            .request()
+            .input('id_producto', sql.Int, idProducto)
+            .query(`
+                SELECT id_producto
+                FROM ProductoLinaje
+                WHERE id_producto = @id_producto
+            `);
+
+        if (existeProducto.recordset.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "Producto no encontrado."
+            });
+        }
+
+        await sebas
+            .request()
+            .input('id_producto', sql.Int, idProducto)
+            .input('nombre', sql.NVarChar, nombre.trim())
+            .input('descripcion', sql.NVarChar, descripcion.trim())
+            .input('categoria', sql.NVarChar, categoria.trim())
+            .input('precio', sql.Decimal(10, 2), precioNumero)
+            .input('imagen_ruta', sql.NVarChar, imagen_ruta || "/IMG/Productos/sin-imagen.png")
+            .query(`
+                UPDATE ProductoLinaje
+                SET
+                    nombre = @nombre,
+                    descripcion = @descripcion,
+                    categoria = @categoria,
+                    precio = @precio,
+                    imagen_ruta = @imagen_ruta
+                WHERE id_producto = @id_producto
+            `);
+
+        return res.json({
+            success: true,
+            message: "Producto actualizado correctamente."
+        });
+
+    } catch (error) {
+        console.error("Error actualizando producto:", error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Error interno al actualizar producto.",
+            error: error.message
+        });
+    }
+});
+
+
+// =====================================================================
+// ADMIN - DESACTIVAR PRODUCTO
+// DELETE /api/admin/productos/:id
+// =====================================================================
+app.delete('/api/admin/productos/:id', async (req, res) => {
+    try {
+        const idProducto = Number(req.params.id);
+
+        if (!idProducto) {
+            return res.status(400).json({
+                success: false,
+                message: "ID de producto no válido."
+            });
+        }
+
+        const sebas = await global.conectarSebasDB();
+
+        if (!sebas) {
+            return res.status(500).json({
+                success: false,
+                message: "No se pudo conectar con la base de datos."
+            });
+        }
+
+        const existeProducto = await sebas
+            .request()
+            .input('id_producto', sql.Int, idProducto)
+            .query(`
+                SELECT id_producto
+                FROM ProductoLinaje
+                WHERE id_producto = @id_producto
+            `);
+
+        if (existeProducto.recordset.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "Producto no encontrado."
+            });
+        }
+
+        await sebas
+            .request()
+            .input('id_producto', sql.Int, idProducto)
+            .query(`
+                UPDATE ProductoLinaje
+                SET estado = 0
+                WHERE id_producto = @id_producto
+            `);
+
+        return res.json({
+            success: true,
+            message: "Producto desactivado correctamente."
+        });
+
+    } catch (error) {
+        console.error("Error desactivando producto:", error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Error interno al desactivar producto.",
+            error: error.message
+        });
+    }
+});
+
+// =====================================================================
+// ADMIN - CAMBIAR ESTADO DE PRODUCTO
+// PUT /api/admin/productos/:id/estado
+// =====================================================================
+app.put('/api/admin/productos/:id/estado', async (req, res) => {
+    try {
+        const idProducto = Number(req.params.id);
+        const { estado } = req.body;
+
+        if (!idProducto) {
+            return res.status(400).json({
+                success: false,
+                message: "ID de producto no válido."
+            });
+        }
+
+        if (![0, 1].includes(Number(estado))) {
+            return res.status(400).json({
+                success: false,
+                message: "Estado no válido. Use 1 para activo o 0 para inactivo."
+            });
+        }
+
+        const sebas = await global.conectarSebasDB();
+
+        if (!sebas) {
+            return res.status(500).json({
+                success: false,
+                message: "No se pudo conectar con la base de datos."
+            });
+        }
+
+        const existeProducto = await sebas
+            .request()
+            .input('id_producto', sql.Int, idProducto)
+            .query(`
+                SELECT id_producto
+                FROM ProductoLinaje
+                WHERE id_producto = @id_producto
+            `);
+
+        if (existeProducto.recordset.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "Producto no encontrado."
+            });
+        }
+
+        await sebas
+            .request()
+            .input('id_producto', sql.Int, idProducto)
+            .input('estado', sql.Int, Number(estado))
+            .query(`
+                UPDATE ProductoLinaje
+                SET estado = @estado
+                WHERE id_producto = @id_producto
+            `);
+
+        return res.json({
+            success: true,
+            message: Number(estado) === 1
+                ? "Producto activado correctamente."
+                : "Producto desactivado correctamente."
+        });
+
+    } catch (error) {
+        console.error("Error cambiando estado del producto:", error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Error interno al cambiar estado del producto.",
+            error: error.message
+        });
+    }
+});
+
+// =====================================================================
+// ADMIN - SUBIR IMAGEN DE PRODUCTO
+// POST /api/admin/productos/imagen
+// =====================================================================
+
+const carpetaProductos = path.join(__dirname, "IMG", "Productos");
+
+if (!fs.existsSync(carpetaProductos)) {
+    fs.mkdirSync(carpetaProductos, { recursive: true });
+}
+
+const storageProductos = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, carpetaProductos);
+    },
+    filename: (req, file, cb) => {
+        const extension = path.extname(file.originalname);
+        const nombreArchivo = `producto-${Date.now()}${extension}`;
+        cb(null, nombreArchivo);
+    }
+});
+
+const uploadProducto = multer({
+    storage: storageProductos,
+    fileFilter: (req, file, cb) => {
+        const tiposPermitidos = [
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+        ];
+
+        if (!tiposPermitidos.includes(file.mimetype)) {
+            return cb(new Error("Solo se permiten imágenes JPG, PNG o WEBP."));
+        }
+
+        cb(null, true);
+    },
+    limits: {
+        fileSize: 5 * 1024 * 1024
+    }
+});
+
+app.post("/api/admin/productos/imagen", uploadProducto.single("imagen"), (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({
+                success: false,
+                message: "No se recibió ninguna imagen."
+            });
+        }
+
+        const rutaImagen = `/IMG/Productos/${req.file.filename}`;
+
+        return res.json({
+            success: true,
+            message: "Imagen subida correctamente.",
+            imagen_ruta: rutaImagen
+        });
+
+    } catch (error) {
+        console.error("Error subiendo imagen:", error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Error interno al subir imagen.",
+            error: error.message
+        });
+    }
+});
+
+// ==============================================================================================================================
+// ADMIN - ELIMINAR PEDIDO
+// ==============================================================================================================================
+async function eliminarPedidoAdminLinaje(idPedido) {
+    const confirmar = confirm(
+        `¿Seguro que deseas eliminar el pedido #${idPedido}?\n\nEsta acción eliminará el pedido y su detalle.`
+    );
+
+    if (!confirmar) {
+        return;
+    }
+
+    try {
+        const respuesta = await fetch(`/api/admin/pedidos/${idPedido}`, {
+            method: "DELETE"
+        });
+
+        const data = await respuesta.json();
+
+        if (!data.success) {
+            alert(data.message || "No se pudo eliminar el pedido.");
+            console.error("Error backend:", data.error);
+            return;
+        }
+
+        alert(data.message || "Pedido eliminado correctamente.");
+        await cargarPedidosAdminLinaje();
+
+    } catch (error) {
+        console.error("Error eliminando pedido:", error);
+        alert("Error al conectar con el servidor.");
+    }
+}
+
+// =====================================================================
+// ADMIN - ELIMINAR PEDIDO
+// DELETE /api/admin/pedidos/:id
+// =====================================================================
+app.delete("/api/admin/pedidos/:id", async (req, res) => {
+    try {
+        const idPedido = Number(req.params.id);
+
+        if (!idPedido) {
+            return res.status(400).json({
+                success: false,
+                message: "ID de pedido no válido."
+            });
+        }
+
+        const sebas = await global.conectarSebasDB();
+
+        if (!sebas) {
+            return res.status(500).json({
+                success: false,
+                message: "No se pudo conectar con la base de datos."
+            });
+        }
+
+        const existePedido = await sebas
+            .request()
+            .input("id_pedido", sql.Int, idPedido)
+            .query(`
+                SELECT id_pedido
+                FROM PedidoLinaje
+                WHERE id_pedido = @id_pedido
+            `);
+
+        if (existePedido.recordset.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "El pedido no existe."
+            });
+        }
+
+        await sebas
+            .request()
+            .input("id_pedido", sql.Int, idPedido)
+            .query(`
+                DELETE FROM DetallePedidoLinaje
+                WHERE id_pedido = @id_pedido;
+
+                DELETE FROM PedidoLinaje
+                WHERE id_pedido = @id_pedido;
+            `);
+
+        return res.json({
+            success: true,
+            message: "Pedido eliminado correctamente."
+        });
+
+    } catch (error) {
+        console.error("Error eliminando pedido:", error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Error al eliminar el pedido en la base de datos.",
+            error: error.message
+        });
+    }
+});
 
 // ==============================================================================================================================
 // 17. LEVANTAR SERVIDOR

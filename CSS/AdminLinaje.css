@@ -587,3 +587,251 @@ td {
         grid-template-columns: 1fr;
     }
 }
+
+/* ===================================================================== */
+/* PRODUCTOS ADMIN */
+/* ===================================================================== */
+
+.imagen-producto-admin {
+    width: 70px;
+    height: 55px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid #e5ecf7;
+}
+
+.badge-activo {
+    background: #e8fff6;
+    color: #00b894;
+    padding: 6px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.badge-inactivo {
+    background: #ffeaea;
+    color: #d63031;
+    padding: 6px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.btn-editar {
+    padding: 8px 12px;
+    border: none;
+    background: #2a5298;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-right: 5px;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.btn-editar:hover {
+    background: #1e3c72;
+}
+
+.btn-eliminar {
+    padding: 8px 12px;
+    border: none;
+    background: #d63031;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.btn-eliminar:hover {
+    background: #b71c1c;
+}
+
+/* ===================================================================== */
+/* FORMULARIO PRODUCTO */
+/* ===================================================================== */
+
+#productoDescripcion {
+    width: 100%;
+    padding: 12px;
+    margin-top: 6px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    resize: vertical;
+    outline: none;
+}
+
+#productoDescripcion:focus {
+    border-color: #2a5298;
+}
+
+#mensajeProducto {
+    margin-top: 12px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* ===================================================================== */
+/* TABLA PRODUCTOS */
+/* ===================================================================== */
+
+#tablaProductos td {
+    vertical-align: middle;
+}
+
+#tablaProductos img {
+    display: block;
+}
+
+#tablaProductos tr:hover {
+    background: #f8fbff;
+}
+
+/* ===================================================================== */
+/* MODAL PRODUCTO */
+/* ===================================================================== */
+
+#modalProducto .modal-content {
+    width: 500px;
+    max-width: 95%;
+}
+
+#modalProducto input,
+#modalProducto select,
+#modalProducto textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 6px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+}
+
+#modalProducto input:focus,
+#modalProducto select:focus,
+#modalProducto textarea:focus {
+    border-color: #2a5298;
+}
+
+/* ===================================================================== */
+/* RESPONSIVE PRODUCTOS */
+/* ===================================================================== */
+
+@media (max-width: 768px) {
+
+    .imagen-producto-admin {
+        width: 60px;
+        height: 45px;
+    }
+
+    .btn-editar,
+    .btn-eliminar {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    #modalProducto .modal-content {
+        width: 95%;
+    }
+}
+
+
+.btn-activar {
+    padding: 8px 12px;
+    border: none;
+    background: #00b894;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    margin-left: 5px;
+}
+
+.btn-activar:hover {
+    background: #009e7a;
+}
+
+.btn-desactivar {
+    padding: 8px 12px;
+    border: none;
+    background: #f6a019;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    margin-left: 5px;
+}
+
+.btn-desactivar:hover {
+    background: #d98a00;
+}
+
+/* ===================================================================== */
+/* SUBIDA DE IMAGEN PRODUCTO */
+/* ===================================================================== */
+
+.drop-imagen-producto {
+    width: 100%;
+    min-height: 150px;
+    margin-top: 8px;
+    border: 2px dashed #b8c7e6;
+    border-radius: 16px;
+    background: #f8fbff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+    overflow: hidden;
+}
+
+.drop-imagen-producto:hover,
+.drop-imagen-producto.dragover {
+    border-color: #2a5298;
+    background: #eef4ff;
+}
+
+.preview-imagen-producto {
+    text-align: center;
+    color: #2a5298;
+    padding: 18px;
+}
+
+.preview-imagen-producto span {
+    font-size: 36px;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.preview-imagen-producto p {
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.preview-imagen-producto small {
+    color: #777;
+}
+
+.preview-imagen-producto img {
+    width: 100%;
+    max-height: 180px;
+    object-fit: cover;
+    border-radius: 14px;
+}
+
+.btn-eliminar-pedido {
+    padding: 8px 12px;
+    border: none;
+    background: #d63031;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.btn-eliminar-pedido:hover {
+    background: #b71c1c;
+}

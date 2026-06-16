@@ -63,9 +63,9 @@
                 Mis pedidos
             </a>
 
-            <a href="#">
-                <span>🖤</span>
-                Favoritos
+            <a href="#vistaMapa" id="btnMenuMapa">
+                <span>🗺️</span>
+                Encuéntranos
             </a>
 
             <a href="#" id="btnMenuDatos">
@@ -113,14 +113,16 @@
         <section id="vistaInicio" class="vista-contenido active-view">
 
             <!-- CATEGORÍAS -->
-            <section class="categories">
-                <button type="button" class="active">🍔 Combos</button>
-                <button type="button">🍔 Hamburguesas</button>
-                <button type="button">🍟 Salchipapas</button>
-                <button type="button">🥤 Bebidas</button>
-                <button type="button">🍰 Postres</button>
-                <button type="button">🏷️ Promociones</button>
-            </section>
+        <section class="categories">
+            <button type="button" class="active">🍔 Combos</button>
+            <button type="button">🍔 Hamburguesas</button>
+            <button type="button">🍟 Salchipapas</button>
+            <button type="button">🍗 Alitas</button>
+            <button type="button">🍣 Makis</button>
+            <button type="button">🥤 Bebidas</button>
+            <button type="button">🍰 Postres</button>
+            <button type="button">🏷️ Promociones</button>
+        </section>
 
             <!-- BANNER SLIDER -->
             <section class="banner-slider">
@@ -159,87 +161,18 @@
                 <a href="#">Ver todos →</a>
             </section>
 
-            <section class="products">
-
+            <section class="products" id="contenedorProductos">
                 <article class="product-card">
-                    <div class="tag">MÁS PEDIDO</div>
-                    <button type="button" class="favorite">♡</button>
-                    <img src="/IMG/Productos/clasica-linaje.png" alt="Clásica Linaje">
                     <div class="product-info">
-                        <h3>Clásica Linaje</h3>
-                        <p>Carne jugosa, queso cheddar, lechuga, tomate, cebolla y salsa linaje.</p>
+                        <h3>Cargando productos...</h3>
+                        <p>Estamos cargando el menú disponible desde el sistema.</p>
+
                         <div class="product-footer">
-                            <strong>S/ 18.90</strong>
-                            <button type="button">🛒 Agregar</button>
+                            <strong>Espere...</strong>
+                            <button type="button" disabled>🛒 Cargando</button>
                         </div>
                     </div>
                 </article>
-
-                <article class="product-card">
-                    <button type="button" class="favorite">♡</button>
-                    <img src="/IMG/Productos/salchipapas-linaje.png" alt="Salchipapas Linaje">
-                    <div class="product-info">
-                        <h3>Salchipapas Linaje</h3>
-                        <p>Salchicha premium, papas fritas y nuestras salsas especiales.</p>
-                        <div class="product-footer">
-                            <strong>S/ 16.50</strong>
-                            <button type="button">🛒 Agregar</button>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="product-card">
-                    <button type="button" class="favorite">♡</button>
-                    <img src="/IMG/Productos/combo-linaje.png" alt="Combo Linaje">
-                    <div class="product-info">
-                        <h3>Combo Linaje</h3>
-                        <p>Hamburguesa clásica + papas + bebida 16 oz.</p>
-                        <div class="product-footer">
-                            <strong>S/ 24.90</strong>
-                            <button type="button">🛒 Agregar</button>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="product-card">
-                    <button type="button" class="favorite">♡</button>
-                    <img src="/IMG/Productos/doble-bacon.png" alt="Doble Bacon">
-                    <div class="product-info">
-                        <h3>Doble Bacon</h3>
-                        <p>Doble carne, doble queso, tocino crocante y salsa linaje.</p>
-                        <div class="product-footer">
-                            <strong>S/ 25.90</strong>
-                            <button type="button">🛒 Agregar</button>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="product-card">
-                    <button type="button" class="favorite">♡</button>
-                    <img src="/IMG/Productos/limonada-clasica.png" alt="Limonada Clásica">
-                    <div class="product-info">
-                        <h3>Limonada Clásica</h3>
-                        <p>Refrescante limonada con hierbabuena natural.</p>
-                        <div class="product-footer">
-                            <strong>S/ 7.90</strong>
-                            <button type="button">🛒 Agregar</button>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="product-card">
-                    <button type="button" class="favorite">♡</button>
-                    <img src="/IMG/Productos/torta-chocolate.png" alt="Torta de Chocolate">
-                    <div class="product-info">
-                        <h3>Torta de Chocolate</h3>
-                        <p>Suave bizcocho de chocolate con cobertura cremosa.</p>
-                        <div class="product-footer">
-                            <strong>S/ 9.90</strong>
-                            <button type="button">🛒 Agregar</button>
-                        </div>
-                    </div>
-                </article>
-
             </section>
 
             <!-- RECOMENDACIONES INTELIGENTES -->
@@ -416,6 +349,22 @@
 
     </main>
 
+<!-- VISTA MAPA / ENCUÉNTRANOS -->
+<section id="vistaMapa" class="vista-contenido">
+    <div class="perfil-page-card">
+        <div class="perfil-page-header">
+            <div>
+                <span>🗺️</span>
+                <h2>Encuéntranos</h2>
+                <p>Ubicación de nuestro local Linaje.</p>
+            </div>
+            <button type="button" class="btn-volver-inicio" data-view="vistaInicio">Volver al inicio</button>
+        </div>
+
+        <div id="map" style="height: 400px; width: 100%;"></div>
+    </div>
+</section>
+
 </div>
 
 <!-- MODAL CARRITO -->
@@ -441,6 +390,24 @@
             <option value="Yape">Yape</option>
             <option value="Plin">Plin</option>
         </select>
+                <!-- TIPO DE PEDIDO -->
+        <label for="tipo_pedido">Tipo de pedido:</label>
+        <select id="tipo_pedido" name="tipo_pedido">
+            <option value="Inmediato" selected>Pedido inmediato</option>
+            <option value="Reservado">Pedido reservado</option>
+        </select>
+
+        <!-- CAMPOS DE RESERVA -->
+        <div id="reserva_campos" style="display:none;">
+            <label for="fecha_reserva">Fecha de reserva:</label>
+            <input type="date" id="fecha_reserva" name="fecha_reserva">
+
+            <label for="hora_reserva">Hora de reserva:</label>
+            <input type="time" id="hora_reserva" name="hora_reserva">
+
+            <label for="observacion_reserva">Observaciones:</label>
+            <input type="text" id="observacion_reserva" name="observacion_reserva">
+        </div>
 
         <button type="button" id="btnProcederCompra" class="btn-proceder-compra">
             Proceder con compra
@@ -454,7 +421,18 @@
         <h2>Validación facial del pedido</h2>
         <p>Para registrar tu pedido, valida tu identidad con el scanner facial.</p>
 
-        <video id="videoPedidoFacial" autoplay playsinline></video>
+        <div class="camera-wrapper-pedido">
+            <video id="videoPedidoFacial" autoplay playsinline></video>
+
+            <div class="face-scanner-overlay-pedido">
+                <div class="face-oval-guide-pedido">
+                    <div class="scan-line-pedido"></div>
+                </div>
+            </div>
+        </div>
+
+        <canvas id="canvasOverlayPedido"></canvas>
+
         <canvas id="canvasPedidoFacial" style="display: none;"></canvas>
 
         <p id="mensajePedidoFacial"></p>
@@ -482,8 +460,35 @@
         </div>
     </div>
 </div>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
+<script>
+    // Inicializar mapa
+    const map = L.map('map').setView([-13.4416, -76.1343], 16); // Cambia a la lat/lng de tu local
+
+    // Capa de mapa
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap',
+        maxZoom: 19,
+    }).addTo(map);
+
+    // Marcador del local
+    L.marker([-13.4416, -76.1343]).addTo(map)
+        .bindPopup('<b>Linaje</b><br>Tu comida favorita aquí.')
+        .openPopup();
+
+    // Mostrar la vista del mapa al hacer clic en el menú
+    const btnMapa = document.getElementById('btnMenuMapa');
+    btnMapa.addEventListener('click', () => {
+        document.querySelectorAll('.vista-contenido').forEach(v => v.classList.remove('active-view'));
+        document.getElementById('vistaMapa').classList.add('active-view');
+        map.invalidateSize(); // Ajusta el mapa al tamaño del contenedor
+    });
+</script>
+
+
+<script src="/JS/face-api.min.js"></script>
 <script src="../JS/UsuarioPrincipal.js"></script>
-
 </body>
 </html>

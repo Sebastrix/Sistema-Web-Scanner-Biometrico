@@ -2,8 +2,8 @@
     --primary: #2a5298;
     --primary-dark: #1e3c72;
     --bg: #f4f6f9;
+    --orange: #f6a019;
 }
-
 
 * {
     margin: 0;
@@ -12,16 +12,15 @@
     font-family: 'Segoe UI', sans-serif;
 }
 
-body {
-    height: 100vh;
-}
+body { height: 100vh; }
 
-/* LAYOUT */
+/* ==============================================================
+   LAYOUT
+   ============================================================== */
 .container {
     display: flex;
     height: 100vh;
 }
-
 
 .left {
     width: 50%;
@@ -34,16 +33,14 @@ body {
     overflow: hidden;
 }
 
-/* textura ligera */
 .overlay {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: url("../IMG/fondo.png"); 
+    background-image: url("../IMG/fondo.png");
     opacity: 0.8;
 }
 
-/* contenido */
 .left-content {
     text-align: center;
     z-index: 2;
@@ -55,17 +52,8 @@ body {
     justify-content: center;
 }
 
-.left h1 {
-    font-size: 60px;
-    letter-spacing: 3px;
-}
-
-.left p {
-    margin-top: 10px;
-    font-size: 14px;
-    letter-spacing: 2px;
-}
-
+.left h1 { font-size: 60px; letter-spacing: 3px; }
+.left p  { margin-top: 10px; font-size: 14px; letter-spacing: 2px; }
 
 .combo {
     position: absolute;
@@ -76,7 +64,6 @@ body {
     margin-bottom: 50px;
 }
 
-
 .right {
     width: 50%;
     background: var(--bg);
@@ -85,7 +72,9 @@ body {
     align-items: center;
 }
 
-/* caja */
+/* ==============================================================
+   CAJA DE LOGIN
+   ============================================================== */
 .login-box {
     background: white;
     padding: 40px;
@@ -95,36 +84,15 @@ body {
     text-align: center;
 }
 
-/* icono */
-.icon {
-    font-size: 40px;
-    margin-bottom: 15px;
-}
+.icon { font-size: 40px; margin-bottom: 15px; }
 
-/* textos */
-.login-box h2 {
-    color: var(--primary);
-    margin-bottom: 5px;
-}
+.login-box h2 { color: var(--primary); margin-bottom: 5px; }
+.login-box span { font-size: 14px; color: gray; }
 
-.login-box span {
-    font-size: 14px;
-    color: gray;
-}
+form { margin-top: 20px; text-align: left; }
 
-/* formulario */
-form {
-    margin-top: 20px;
-    text-align: left;
-}
+label { font-size: 13px; margin-top: 15px; display: block; }
 
-label {
-    font-size: 13px;
-    margin-top: 15px;
-    display: block;
-}
-
-/* input */
 .input {
     display: flex;
     align-items: center;
@@ -135,9 +103,7 @@ label {
     background: #fafafa;
 }
 
-.input span {
-    margin-right: 8px;
-}
+.input span { margin-right: 8px; }
 
 .input input {
     border: none;
@@ -146,7 +112,6 @@ label {
     background: transparent;
 }
 
-/* fila */
 .row {
     display: flex;
     justify-content: space-between;
@@ -154,7 +119,6 @@ label {
     margin-top: 10px;
 }
 
-/* botón */
 button {
     width: 100%;
     margin-top: 20px;
@@ -172,18 +136,9 @@ button:hover {
     box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
 
-/* texto inferior */
-.bottom-text {
-    font-size: 12px;
-    margin-top: 20px;
-}
+.bottom-text { font-size: 12px; margin-top: 20px; }
+.bottom-text a { color: var(--primary); text-decoration: none; }
 
-.bottom-text a {
-    color: var(--primary);
-    text-decoration: none;
-}
-
-/* features */
 .features {
     margin-top: 20px;
     display: flex;
@@ -199,24 +154,30 @@ button:hover {
     font-weight: 600;
 }
 
-.btn-facial:hover {
-    background: #eef4ff;
+.btn-facial:hover { background: #eef4ff; }
+
+.mensaje-login {
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 10px;
+    min-height: 18px;
 }
 
+/* ==============================================================
+   MODAL RECONOCIMIENTO FACIAL
+   ============================================================== */
 .modal-facial {
     display: none;
     position: fixed;
     z-index: 1000;
     inset: 0;
-    background: rgba(0, 0, 0, 0.55);
+    background: rgba(0,0,0,0.55);
     justify-content: center;
     align-items: center;
     padding: 20px;
 }
 
-.modal-facial.active {
-    display: flex;
-}
+.modal-facial.active { display: flex; }
 
 .modal-facial-content {
     width: 420px;
@@ -224,24 +185,12 @@ button:hover {
     border-radius: 22px;
     padding: 28px;
     text-align: center;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.25);
 }
 
-.modal-facial-content h2 {
-    color: var(--primary);
-    margin-bottom: 8px;
-}
-
-.modal-facial-content p {
-    color: #666;
-    font-size: 14px;
-    margin-bottom: 15px;
-}
-
-.modal-facial-content label {
-    text-align: left;
-    font-weight: 600;
-}
+.modal-facial-content h2 { color: var(--primary); margin-bottom: 8px; }
+.modal-facial-content > p { color: #666; font-size: 14px; margin-bottom: 15px; }
+.modal-facial-content label { text-align: left; font-weight: 600; }
 
 .modal-facial-content input {
     width: 100%;
@@ -253,18 +202,121 @@ button:hover {
     outline: none;
 }
 
-#videoFacial {
+/* ==============================================================
+   BLOQUE DE CÁMARA
+   El wrapper es el contenedor visual con bordes redondeados.
+   El canvas se posiciona FUERA del wrapper con margin-top negativo
+   para que overflow:hidden no lo corte nunca.
+   Orden real en pantalla:
+     video (dentro wrapper)  ← fondo
+     canvas (fuera wrapper)  ← landmarks encima del video
+     face-scanner-overlay    ← óvalo + láser, lo más arriba
+   ============================================================== */
+.camera-wrapper {
+    position: relative;
     width: 100%;
     height: 260px;
     background: #111;
     border-radius: 16px;
-    object-fit: cover;
+    overflow: hidden;           /* recorta el video a bordes redondeados */
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.6);
+    /* isolation crea contexto de apilamiento propio */
+    isolation: isolate;
 }
 
+#videoFacial {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    z-index: 1;
+}
+
+/* El óvalo y la línea láser van DENTRO del wrapper */
+.face-scanner-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* ==============================================================
+   CANVAS DE LANDMARKS
+   Está FUERA del camera-wrapper en el HTML.
+   Se sube con margin-top negativo para quedar justo encima del video.
+   Al estar fuera del overflow:hidden nunca se recorta.
+   ============================================================== */
+#canvasOverlay {
+    display: block;
+    width: 100%;
+    height: 260px;
+    margin-top: -260px;         /* sube para superponerse al video */
+    position: relative;
+    pointer-events: none;
+    z-index: 1050;              /* encima del modal (1000) y del óvalo (10) */
+    border-radius: 16px;
+}
+
+/* ==============================================================
+   ÓVALO GUÍA CON ESTADOS
+   ============================================================== */
+.face-oval-guide {
+    width: 160px;
+    height: 210px;
+    border: 3px dashed rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 0 0 9999px rgba(30, 60, 114, 0.45);
+    animation: pulseBorder 2.5s infinite ease-in-out;
+    overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* CARA BIEN CENTRADA → verde */
+.face-oval-guide.ovalo-ok {
+    border-color: rgba(0, 255, 120, 0.95) !important;
+    border-style: solid !important;
+    box-shadow: 0 0 0 9999px rgba(0, 60, 30, 0.35),
+                0 0 24px rgba(0, 255, 120, 0.7) !important;
+    animation: none;
+}
+
+/* CARA DETECTADA FUERA → rojo */
+.face-oval-guide.ovalo-error {
+    border-color: rgba(255, 60, 60, 0.95) !important;
+    border-style: dashed !important;
+    box-shadow: 0 0 0 9999px rgba(80, 0, 0, 0.35),
+                0 0 18px rgba(255, 60, 60, 0.6) !important;
+    animation: none;
+}
+
+/* Línea láser de escaneo */
+.scan-line {
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to right, transparent, var(--orange), transparent);
+    box-shadow: 0 0 10px var(--orange);
+    animation: scanMove 3s infinite ease-in-out;
+}
+
+/* Oculta el láser cuando la cara está bien posicionada */
+.face-oval-guide.ovalo-ok .scan-line { display: none; }
+
+/* ==============================================================
+   MENSAJE Y BOTONES DEL MODAL
+   ============================================================== */
 #mensajeFacial {
     margin-top: 12px;
     font-size: 13px;
     font-weight: 600;
+    min-height: 18px;
 }
 
 .facial-actions {
@@ -274,39 +326,29 @@ button:hover {
     margin-top: 14px;
 }
 
-.btn-cerrar-facial {
-    background: #777;
+.btn-cerrar-facial { background: #777; }
+
+/* ==============================================================
+   ANIMACIONES
+   ============================================================== */
+@keyframes pulseBorder {
+    0%, 100% { border-color: rgba(255,255,255,0.4); transform: scale(1); }
+    50%       { border-color: var(--orange);         transform: scale(1.02); }
 }
 
-/* ================= RESPONSIVE ================= */
+@keyframes scanMove {
+    0%, 100% { top: 0%; }
+    50%       { top: 100%; }
+}
 
+/* ==============================================================
+   RESPONSIVE
+   ============================================================== */
 @media (max-width: 768px) {
-
-    .container {
-        flex-direction: column;
-    }
-
-    .left {
-        width: 100%;
-        height: 40%;
-    }
-
-    .right {
-        width: 100%;
-        height: 60%;
-    }
-
-    .combo {
-        display: none;
-    }
-
-    .login-box {
-        width: 90%;
-    }
-
-    .features {
-        flex-direction: column;
-        gap: 5px;
-        text-align: center;
-    }
+    .container { flex-direction: column; }
+    .left  { width: 100%; height: 40%; }
+    .right { width: 100%; height: 60%; }
+    .combo { display: none; }
+    .login-box { width: 90%; }
+    .features { flex-direction: column; gap: 5px; text-align: center; }
 }

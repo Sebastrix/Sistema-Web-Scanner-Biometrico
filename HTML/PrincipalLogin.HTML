@@ -45,8 +45,8 @@
 
                 <button type="submit">Iniciar sesión</button>
                 <button type="button" id="btnAbrirLoginFacial" class="btn-facial">
-                Ingresar con reconocimiento facial
-            </button>
+                    Ingresar con reconocimiento facial
+                </button>
 
                 <p id="mensajeLogin" class="mensaje-login"></p>
             </form>
@@ -64,16 +64,31 @@
         </div>
     </div>
 </div>
-<!-- MODAL LOGIN FACIAL -->
+
 <div id="modalLoginFacial" class="modal-facial">
     <div class="modal-facial-content">
+
         <h2>Ingreso con reconocimiento facial</h2>
         <p>Ingresa tu usuario, activa la cámara y captura tu rostro.</p>
 
         <label>Usuario</label>
         <input type="text" id="usuarioFacial" placeholder="Ingrese su usuario">
 
-        <video id="videoFacial" autoplay playsinline></video>
+        <!-- CAPA 1 y 2: video + óvalo (con overflow:hidden para bordes redondeados) -->
+        <div class="camera-wrapper">
+            <video id="videoFacial" autoplay playsinline></video>
+
+            <div class="face-scanner-overlay">
+                <div class="face-oval-guide">
+                    <div class="scan-line"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CAPA 3: canvas de landmarks FUERA del wrapper para que no lo recorte -->
+        <canvas id="canvasOverlay"></canvas>
+
+        <!-- Canvas oculto para capturar el frame y enviarlo al backend -->
         <canvas id="canvasFacial" style="display: none;"></canvas>
 
         <p id="mensajeFacial"></p>
@@ -83,8 +98,12 @@
             <button type="button" id="btnCapturarLoginFacial">Capturar e ingresar</button>
             <button type="button" id="btnCerrarLoginFacial" class="btn-cerrar-facial">Cancelar</button>
         </div>
+
     </div>
 </div>
-<script src="../JS/PrincipalLogin.js"></script>
+
+<script src="/JS/face-api.min.js"></script>
+<script src="/JS/PrincipalLogin.js"></script>
+
 </body>
 </html>

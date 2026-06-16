@@ -1,10 +1,20 @@
-import sys
-import json
 import os
+import sys
+
+# ==============================================================================
+# CONFIGURACIÓN CRÍTICA: Silenciar logs de TensorFlow y avisos del sistema
+# Esto evita que se ensucie el stdout y arruine el JSON.parse() en Node.js
+# ==============================================================================
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+import warnings
+warnings.filterwarnings("ignore")
+
+import json
 from deepface import DeepFace
 
 
 def responder(success, message, verified=False, distance=None, threshold=None):
+    """Imprime un JSON limpio y único en la consola"""
     print(json.dumps({
         "success": success,
         "message": message,
@@ -12,6 +22,7 @@ def responder(success, message, verified=False, distance=None, threshold=None):
         "distance": distance,
         "threshold": threshold
     }))
+    sys.exit(0) # Forzar la salida limpia del script
 
 
 def main():
@@ -23,14 +34,15 @@ def main():
     imagen_actual = sys.argv[2]
 
     if not os.path.exists(imagen_registrada):
-        responder(False, "La imagen registrada no existe.")
+        responder(False, f"La imagen registrada no existe en la ruta especificada.")
         return
 
     if not os.path.exists(imagen_actual):
-        responder(False, "La imagen actual no existe.")
+        responder(False, f"La imagen actual temporal no existe.")
         return
 
     try:
+        # Ejecución del motor DeepFace
         resultado = DeepFace.verify(
             img1_path=imagen_registrada,
             img2_path=imagen_actual,
@@ -39,28 +51,34 @@ def main():
             enforce_detection=True
         )
 
+        # Extracción segura de los valores devueltos por la IA
         verified = bool(resultado.get("verified", False))
         distance = resultado.get("distance", None)
         threshold = resultado.get("threshold", None)
 
+        # Conversión manual a flotantes nativos de Python por seguridad de tipado en JSON
+        if distance is not None: distance = float(distance)
+        if threshold is not None: threshold = float(threshold)
+
         if verified:
             responder(
-                True,
+                True, # success: El proceso se completó correctamente
                 "Identidad facial validada correctamente.",
-                verified,
+                verified, # true: Los rostros coinciden
                 distance,
                 threshold
             )
         else:
             responder(
-                False,
+                True, # success: TRUE porque el script terminó su análisis con éxito
                 "El rostro no coincide con el cliente registrado.",
-                verified,
+                verified, # false: Los rostros NO coinciden
                 distance,
                 threshold
             )
 
     except Exception as error:
+        # Captura fallos de lectura, imágenes corruptas o si enforce_detection no halló un rostro
         responder(False, f"Error al validar identidad facial: {str(error)}")
 
 

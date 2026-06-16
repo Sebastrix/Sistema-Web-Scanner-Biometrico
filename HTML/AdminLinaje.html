@@ -124,9 +124,9 @@
                             <th>Total</th>
                             <th>Estado</th>
                             <th>Detalle</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
-
                     <tbody id="tablaPedidosAdmin">
                         <tr>
                             <td colspan="7">Cargando pedidos...</td>
@@ -145,12 +145,44 @@
         </section>
 
         <!-- MENÚ -->
-        <section id="menu" class="section">
-            <div class="welcome-box">
-                <h2>Menú</h2>
-                <p>Aquí podrás registrar platos, combos, bebidas y precios.</p>
-            </div>
-        </section>
+<!-- MENÚ / PRODUCTOS -->
+
+<section id="menu" class="section">
+
+<div class="section-header">
+    <h2>Gestión de Productos</h2>
+
+    <button id="btnAbrirModalProducto">
+        + Nuevo Producto
+    </button>
+</div>
+
+<div class="table-box">
+    <table>
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Categoría</th>
+                <th>Precio</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody id="tablaProductos">
+            <tr>
+                <td colspan="7">Cargando productos...</td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>
+
+</section>
+
 
         <!-- REPORTES -->
         <section id="reportes" class="section">
@@ -191,6 +223,107 @@
         </form>
     </div>
 </div>
+
+<!-- MODAL PRODUCTO -->
+
+<div id="modalProducto" class="modal">
+<div class="modal-content">
+
+    <h2 id="tituloModalProducto">
+        Nuevo Producto
+    </h2>
+
+    <form id="formProducto">
+
+        <input type="hidden" id="productoId">
+
+        <label>Nombre</label>
+        <input
+            type="text"
+            id="productoNombre"
+            required
+        >
+
+        <label>Descripción</label>
+        <textarea
+            id="productoDescripcion"
+            rows="4"
+            required
+        ></textarea>
+
+        <label>Categoría</label>
+
+        <select
+            id="productoCategoria"
+            required
+        >
+            <option value="">Seleccione</option>
+            <option value="hamburguesa">Hamburguesa</option>
+            <option value="salchipapa">Salchipapa</option>
+            <option value="combo">Combo</option>
+            <option value="bebida">Bebida</option>
+            <option value="postre">Postre</option>
+            <option value="alitas">Alitas</option>
+            <option value="makis">Makis</option>
+        </select>
+
+        <label>Precio</label>
+        <input
+            type="number"
+            id="productoPrecio"
+            min="0"
+            step="0.01"
+            required
+        >
+
+        <label>Imagen del producto</label>
+
+        <input
+            type="hidden"
+            id="productoImagen"
+        >
+
+        <div id="dropImagenProducto" class="drop-imagen-producto">
+            <input
+                type="file"
+                id="inputImagenProducto"
+                accept="image/png, image/jpeg, image/webp"
+                hidden
+            >
+
+            <div id="previewImagenProducto" class="preview-imagen-producto">
+                <span>📷</span>
+                <p>Arrastra una imagen aquí</p>
+                <small>o haz clic para seleccionar</small>
+            </div>
+        </div>
+        <p id="mensajeProducto"></p>
+
+        <div class="modal-actions">
+
+            <button
+                type="button"
+                id="btnCerrarModalProducto"
+                class="btn-cancelar"
+            >
+                Cancelar
+            </button>
+
+            <button
+                type="submit"
+                class="btn-guardar"
+            >
+                Guardar
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+</div>
+
 <!-- MODAL DETALLE PEDIDO ADMIN -->
 <div id="modalDetallePedidoAdmin" class="modal-detalle-admin">
     <div class="modal-detalle-admin-content">

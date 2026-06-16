@@ -13,3 +13,4 @@ compra(4, 2).
 compra(4, 3).
 compra(4, 4).
 compra(4, 5).
+compra(4, 6).

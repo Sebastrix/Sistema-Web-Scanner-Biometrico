@@ -3,7 +3,6 @@ import json
 import os
 from deepface import DeepFace
 
-
 def responder(success, message, rostro_codigo=None):
     print(json.dumps({
         "success": success,
